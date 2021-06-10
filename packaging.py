@@ -36,7 +36,7 @@ for line in dirlist:
 	if os.path.isdir(path):
 	#compound condition
 		print(path.strip())
-		if len(path.split('_')) > 2 && len(path.split('_')) < 3:
+		if len(path.split('_')) > 2 and len(path.split('_')) < 3:
 			somewhere="output/compound/{}".format(line.strip())
 			meta_dest = somewhere + '/' + 'MODS.xml'
 		if '.xml' not in line:
