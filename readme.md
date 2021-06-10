@@ -2,6 +2,10 @@
 
 instructions for running the prototype:
 
+first run the setup script to create needed directories input and output and working
+
+```sh setup.sh```
+
 
 add files from the suggested sample_data folder to the input folder (where they remain zipped)
 
