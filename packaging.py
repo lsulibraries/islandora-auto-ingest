@@ -26,26 +26,33 @@ input_directory
 	└── MODS.xml
 
 """
+
+#with naming convention as is, it is difficult to tell if a simple object is a compound parent.
 dirlist = os.listdir('working/')
-print(dirlist)
-os.makedirs('output/simple')
-os.makedirs('output/compound')
 
+#clumsy but gets the job done.
 for line in dirlist:
-	path = 'working/' + line
-	if os.path.isdir(path):
-	#compound condition
-		print(path.strip())
-		if len(path.split('_')) > 2 and len(path.split('_')) < 3:
-			somewhere="output/compound/{}".format(line.strip())
-			meta_dest = somewhere + '/' + 'MODS.xml'
-		if '.xml' not in line:
-			os.makedirs(somewhere+'/'+line[:-4])
-			os.rename(path, somewhere+'/'+line[:-4]+'/'+'OBJ.jp2')
-			shutil.copyfile('output/compound/'+line[:-4]+'.xml', somewhere+'/'+line[:-4]+'/MODS.xml')
+	pattern = line.split('_')
+	#compound parent identifier (cannot tell difference between simple)
+	if '.xml' in line and len(pattern) == 3:
+		os.makedirs('output/compound/'+line[:-4])
+		os.rename('working/' + line, 'output/compound/'+line[:-4]+'/MODS.xml')
 
-			os.rename("{}.xml".format(compound_meta), meta_dest)
-	else:
-		dest = 'output/simple/{}'.format(line.strip())
-		#move to simple folder
-		shutil.move(path, dest)
+#make subdirs loop
+for line in dirlist:
+	#compound child identifier
+	pattern = line.split('_')
+	if len(pattern) > 3 and '.xml' in line:
+		ending = line.split('.')
+		os.makedirs('output/compound/'+line[:-8]+'/'+line[:-4])
+
+#move children to subdirs loop
+for line in dirlist:
+	#compound child identifier
+	pattern = line.split('_')
+	if len(pattern) > 3:
+		ending = line.split('.')
+		if '.xml' not in line:
+			os.rename('working/' + line, 'output/compound/'+line[:-8]+'/'+line[:-4]+'/OBJ.'+ending[1])
+		else:
+			os.rename('working/' + line, 'output/compound/'+line[:-8]+'/'+line[:-4]+'/MODS.xml')
