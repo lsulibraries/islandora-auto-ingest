@@ -35,8 +35,8 @@ for line in dirlist:
 	pattern = line.split('_')
 	#compound parent identifier (cannot tell difference between simple)
 	if '.xml' in line and len(pattern) == 3:
-		os.makedirs('output/compound/'+line[:-4])
-		os.rename('working/' + line, 'output/compound/'+line[:-4]+'/MODS.xml')
+		os.makedirs('output/'+line[:-4])
+		os.rename('working/' + line, 'output/'+line[:-4]+'/MODS.xml')
 
 #make subdirs loop
 for line in dirlist:
@@ -44,7 +44,7 @@ for line in dirlist:
 	pattern = line.split('_')
 	if len(pattern) > 3 and '.xml' in line:
 		ending = line.split('.')
-		os.makedirs('output/compound/'+line[:-8]+'/'+line[:-4])
+		os.makedirs('output/'+line[:-8]+'/'+line[:-4])
 
 #move children to subdirs loop
 for line in dirlist:
@@ -53,6 +53,6 @@ for line in dirlist:
 	if len(pattern) > 3:
 		ending = line.split('.')
 		if '.xml' not in line:
-			os.rename('working/' + line, 'output/compound/'+line[:-8]+'/'+line[:-4]+'/OBJ.'+ending[1])
+			os.rename('working/' + line, 'output/'+line[:-8]+'/'+line[:-4]+'/OBJ.'+ending[1])
 		else:
-			os.rename('working/' + line, 'output/compound/'+line[:-8]+'/'+line[:-4]+'/MODS.xml')
+			os.rename('working/' + line, 'output/'+line[:-8]+'/'+line[:-4]+'/MODS.xml')

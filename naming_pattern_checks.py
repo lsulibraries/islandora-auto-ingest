@@ -35,5 +35,4 @@ def namecheck_hyphen(filepath):
 		quit()
 
 if __name__ == '__main__':
-	confirm_flat_dir()
 	run_namecheck_series()
