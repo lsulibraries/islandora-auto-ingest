@@ -30,7 +30,6 @@ input_directory
 #with naming convention as is, it is difficult to tell if a simple object is a compound parent.
 dirlist = os.listdir('working/')
 
-#clumsy but gets the job done.
 for line in dirlist:
 	pattern = line.split('_')
 	#compound parent identifier (cannot tell difference between simple)
@@ -56,3 +55,5 @@ for line in dirlist:
 			os.rename('working/' + line, 'output/'+line[:-8]+'/'+line[:-4]+'/OBJ.'+ending[1])
 		else:
 			os.rename('working/' + line, 'output/'+line[:-8]+'/'+line[:-4]+'/MODS.xml')
+
+print('files packaged into directory "output"')
