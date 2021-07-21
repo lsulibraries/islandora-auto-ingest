@@ -14,24 +14,20 @@ def namecheck_chars(filepath):
 	for path in filepath:
 		for c in characters_disallowed:
 			if c in path:
-				print('bad characters in filenames')
-				print(c)
-				print(path)
+				print('bad characters "' + c + '"  in ' + filepath)
 
 def namecheck_underscores(filepath):
 	chunks = filepath.split('_')
 	if len(chunks) > 4:
 		print('bad underscore in', filepath , 'too many underscores')
 	if  len(chunks) < 1:
-		print('No underscores in', filepath , 'do you even naming convention?')
+		print('No underscores in', filepath , 'where are my underscores?')
 
-		#write_to_log('bad underscore in', filepath , 'too many underscores')
 
 def namecheck_hyphen(filepath):
 	chunks = filepath.split('-')
 	if len(chunks) > 2:
 		print('too many hypens in', filepath, 'only one hypen allowed to indicate sub-institutions')
-		#write_to_log('too many hypens in', filepath, 'only one hypen allowed to indicate sub-institutions')
 		quit()
 
 if __name__ == '__main__':
