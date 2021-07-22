@@ -15,3 +15,4 @@ then
 else
 	echo 'check files for naming patterns, packaging canceled'
 fi
+python3 compound_drush_cmd.py
