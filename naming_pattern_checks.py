@@ -45,7 +45,7 @@ def namecheck_underscores(filepath):
 def namecheck_hyphen(filepath):
 	bad_hyphs = 0
 	chunks = filepath.split('-')
-	if len(chunks) > 2:
+	if len(chunks) > 1:
 		print('hyphen limit (max 1) in ' + filepath )
 		bad_hyphs += 1
 	return bad_hyphs
