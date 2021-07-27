@@ -15,4 +15,5 @@ then
 else
 	echo 'check files for naming patterns, packaging canceled'
 fi
+cd /home/wwc/Clones/islandora-auto-ingest
 python3 compound_drush_cmd.py
