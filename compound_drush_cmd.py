@@ -18,7 +18,8 @@ extensions = set(extensions)
 
 big_cmodel_string = ''
 for ext in extensions:
-	big_cmodel_string += "islandora:{},".format(cmodel_dict[ext])
+	if ext in cmodel_dict:
+		big_cmodel_string += "islandora:{},".format(cmodel_dict[ext])
 
 folder = subfolder[1]
 chunks = folder[0]

@@ -18,8 +18,12 @@ def namecheck_dots(filepath):
 	if filepath.count('.') > 1:
 		print('too many periods "." in ' + filepath)
 		return 1
+	elif filepath.count('.') == 0:
+		print('there must be one dot/period in the filepath')
+		return 1
 	else:
 		return 0
+
 
 #does this need to loop at all
 def namecheck_chars(filepath):
@@ -38,7 +42,7 @@ def namecheck_underscores(filepath):
 		print('underscore count to large (3 max) in ' + filepath )
 		bad_unders += 1
 	if  len(chunks) < 1:
-		print('underscores missing in ' + filepath)
+		print('underscores missing in {}'.format(filepath))
 		bad_unders += 1
 	return bad_unders
 
@@ -58,7 +62,8 @@ def namecheck_lonely(filepath):
 		if chunks[0] in file:
 			count += 1
 	if count <= 1:
-		print('lonely object ' + filepath + "missing children if compound, or missing pair if simple")
+		lonely_message = 'lonely object {} missing children if compound, or missing pair if simple'
+		print(lonely_message.format(filepath))
 		bad_lonesome += 1
 	return bad_lonesome
 
@@ -66,6 +71,5 @@ if __name__ == '__main__':
 	result = run_namecheck_series()
 	sys.exit(result)
 
-
-#separate checks for simples copy this and rename for simples 
-#coupling of parentname within childname 
+#only allow limited file extension
+#pair is xml and one of cmodel_dict
