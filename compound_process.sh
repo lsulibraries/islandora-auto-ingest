@@ -14,7 +14,7 @@ then
 		cd /home/wwc/Clones/islandora-auto-ingest
 		python3 compound_drush_cmd.py
 	else
-		echo 'packing failed, command population canceled'
+		echo 'packaging failed, command population canceled'
 	fi
 else
 	echo 'check files for naming patterns, packaging canceled'

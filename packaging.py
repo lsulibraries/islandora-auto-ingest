@@ -1,9 +1,6 @@
 #python script for organizing for ingest into LDL based on organize.py used for HNOC ingest in feb 2021
-import os, shutil, sys
+import os, sys
 """
-
-simple objects should be output in a flat directory.
-
 Desired output for compound objects:
 
 input_directory
@@ -37,7 +34,7 @@ def package_compound_files():
 		#compound parent identifier (cannot tell difference between simple)
 		if '.xml' in line and len(pattern) == 3:
 			os.makedirs('output/'+ending[0])
-			os.rename('working/' + line, 'output/'+ending[0]+'/MODS.xml')
+			os.rename('working/{}'.format(line), 'output/{}/MODS.xml'.format(ending[0]))
 
 
 	#make subdirs loop
@@ -48,7 +45,7 @@ def package_compound_files():
 			pattern.pop()
 			folder = '_'.join(pattern)
 			ending = line.split('.')
-			os.makedirs('output/'+folder+'/'+line[:-4])
+			os.makedirs('output/{0}/{1}'.format(folder, ending[1]))
 
 	#move children to subdirs loop
 	for line in dirlist:
@@ -59,10 +56,13 @@ def package_compound_files():
 			folder = '_'.join(pattern)
 			ending = line.split('.')
 			if '.xml' not in line:
-				os.rename('working/' + line, 'output/'+folder+'/'+ending[0]+'/OBJ.'+ending[1])
+				source = 'working/{}'.format(line)
+				dest = 'output/{0}/{1}/OBJ.{2}'.format(folder, ending[0], ending[1])
+				os.rename(source, dest )
 			else:
-				os.rename('working/' + line, 'output/'+folder+'/'+ending[0]+'/MODS.xml')
-
+				source ='working/{}'.format(line)
+				dest = 'output/{0}/{1}/MODS.xml'.format(folder, ending[0])
+				os.rename(source, dest)
 	print('files packaged into directory "output"')
 	return 0
 
