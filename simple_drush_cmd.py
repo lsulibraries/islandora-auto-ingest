@@ -12,24 +12,24 @@ def simple_command_populator():
     one_path_is_all = ''
     for path in paths:
         if os.path.isdir(path):
-            print('error, directory in output.'
-                  ' this is not a simple object set')
+            print("error, directory in output."
+                  " this is not a simple object set")
             return 1
         if '.xml' not in path:
             one_path_is_all = path
 
     objtype = one_path_is_all.split('.')
     chunks = one_path_is_all.split('_')
-    ns = '{0}-{1}'.format(chunks[0], chunks[1])
-    namespace = '--namespace={}'.format(ns)
+    ns = "{0}-{1}".format(chunks[0], chunks[1])
+    namespace = "--namespace={}".format(ns)
     parent = "{}:collection".format(ns)
     cmodel_str = "--content_models=islandora:{}"
     cmodel = cmodel_str.format(cmodel_dict[objtype[1]])
-    target = '--target=/etc/islandora-auto-ingest-kit/output/'
-    target += ' --type=directory'
-    cmd_str = 'drush -u 1 ibsp {0} {1} {2} {3}'
+    target = "--target=/etc/islandora-auto-ingest-kit/output/"
+    target += " --type=directory"
+    cmd_str = "drush -u 1 ibsp {0} {1} {2} {3}"
     cmd = cmd_str.format(cmodel, target, parent, namespace)
-    print('constructed drush command for execution,'
+    print("constructed drush command for execution,"
           " review args for accuracy:\n", cmd)
     return 0
 

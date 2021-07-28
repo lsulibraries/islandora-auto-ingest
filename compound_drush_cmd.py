@@ -22,13 +22,13 @@ def compound_command_populator():
         if ext in cmodel_dict:
             big_cmodel_string += "islandora:{},".format(cmodel_dict[ext])
         else:
-            print('filetype not supported for packaging')
+            print("filetype not supported for packaging")
             return 1
     folder = subfolder[1]
     chunks = folder[0]
     chunks = chunks.split('_')
     ns = chunks[0] + '-' + chunks[1]
-    namespace = '--namespace={}'.format(ns)
+    namespace = "--namespace={}".format(ns)
     parent = "--parent={}:collection".format(ns)
     cmodel = "--content_models={}".format(big_cmodel_string)
     target = "--target=/etc/islandora-auto-ingest-kit/output/"
