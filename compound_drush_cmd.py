@@ -36,8 +36,7 @@ def compound_command_populator():
 	cModel = "--content_models={}".format(big_cmodel_string)
 	target_type = "--target=/etc/islandora-auto-ingest-kit/output/ --type=directory "
 	cmd = "drush -u 1 icbsp {0} {1} {2} {3}".format(cModel, target_type, parent, namespace)
-
-	print(cmd)
+	print('constructed drush command for execution, review args for accuracy:', cmd)
 	return 0
 
 if __name__ == '__main__':
