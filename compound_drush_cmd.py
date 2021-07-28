@@ -27,7 +27,7 @@ def compound_command_populator():
     folder = subfolder[1]
     chunks = folder[0]
     chunks = chunks.split('_')
-    ns = chunks[0] + '-' + chunks[1]
+    ns = "{0}-{1}".format(chunks[0], chunks[1])
     namespace = "--namespace={}".format(ns)
     parent = "--parent={}:collection".format(ns)
     cmodel = "--content_models={}".format(big_cmodel_string)
