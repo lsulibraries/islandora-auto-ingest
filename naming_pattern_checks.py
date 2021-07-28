@@ -6,11 +6,13 @@ def run_namecheck_series():
 	error_counts = 0
 	for file in os.listdir('working'):
 		error_counts += namecheck_dots(file)
+		if error_counts == 0:
+			error_counts += namecheck_ext(file)
 		error_counts += namecheck_chars(file)
+		if error_counts == 0:
+			error_counts += namecheck_lonely(file)
 		error_counts += namecheck_underscores(file)
 		error_counts += namecheck_hyphen(file)
-		error_counts += namecheck_lonely(file)
-		error_counts += namecheck_ext(file)
 	if error_counts == 0:
 		print('checks_completed, proceede to packaging')
 	else:
@@ -75,7 +77,7 @@ def namecheck_lonely(filepath):
 		if chunks[0] in file:
 			count += 1
 	if count <= 1:
-		lonely_message = 'lonely object {} missing children if compound, or missing pair if simple'
+		lonely_message = 'lonely object {} missing pair or missing children'
 		print(lonely_message.format(filepath))
 		bad_lonesome += 1
 	return bad_lonesome
