@@ -58,7 +58,7 @@ def namecheck_underscores(filepath):
     if len(chunks) > 4:
         print("underscore count to large (3 max) in {}".format(filepath))
         bad_unders += 1
-    if len(chunks) < 2:
+    if len(chunks) < 3:
         print("underscores missing in {}".format(filepath))
         bad_unders += 1
     return bad_unders
