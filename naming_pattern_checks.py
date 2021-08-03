@@ -8,6 +8,8 @@ def run_namecheck_series():
         error_counts += namecheck_dots(file)
         if error_counts == 0:
             error_counts += namecheck_ext(file)
+            error_counts += namecheck_has_xml(file)
+            error_counts += namecheck_dupe_obj(file)
         error_counts += namecheck_chars(file)
         if error_counts == 0:
             error_counts += namecheck_lonely(file)
@@ -18,6 +20,42 @@ def run_namecheck_series():
     else:
         print("errors found {} total".format(error_counts))
     return error_counts
+
+
+def namecheck_has_xml(filepath):
+    filelist = os.listdir('working')
+    splitpath = filepath.split('.')
+    if splitpath[1] != 'xml':
+        pair = splitpath[0]
+        pair += '{}'.format('.xml')
+        if pair not in filelist:
+            print('Object file {} is missing an xml file'.format(filepath))
+            return 1
+        else:
+            return 0
+    else:
+        return 0
+
+
+def namecheck_dupe_obj(filepath):
+    if '.xml' not in filepath:
+        filelist = os.listdir('working')
+        splitpath = filepath.split('.')
+        count = 0
+        for file in filelist:
+            if splitpath[0] in file:
+                count += 1
+        if count < 3:
+            return 0
+        else:
+            print('check file {}'.format(filepath))
+            print('check pattern {}'.format(splitpath[0]))
+            print('more than two files share a filename, '
+                  'naming pattern expects a '
+                  'mods-object pair, not a trio or more')
+            return 1
+    else:
+        return 0
 
 
 def namecheck_ext(filepath):
