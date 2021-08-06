@@ -1,5 +1,5 @@
 #!/bin/bash
-unzip -d  working input/*
+unzip -q -d  working input/*
 python3 naming_pattern_checks.py
 if [ $? -eq 0 ] 
 then
