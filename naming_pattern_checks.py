@@ -5,16 +5,16 @@ import sys
 def run_namecheck_series():
     error_counts = 0
     for file in os.listdir('working'):
+        # check for correct number of '.' in filename
         error_counts += namecheck_dots(file)
         if error_counts == 0:
             error_counts += namecheck_ext(file)
-            error_counts += namecheck_has_xml(file)
-            error_counts += namecheck_dupe_obj(file)
+            error_counts += namecheck_object_pair(file)
+        error_counts += namecheck_hyphen(file)
+        error_counts += namecheck_underscores(file)
         error_counts += namecheck_chars(file)
         if error_counts == 0:
             error_counts += namecheck_lonely(file)
-        error_counts += namecheck_underscores(file)
-        error_counts += namecheck_hyphen(file)
     if error_counts == 0:
         print("checks_completed, proceede to packaging")
     else:
@@ -22,40 +22,26 @@ def run_namecheck_series():
     return error_counts
 
 
-def namecheck_has_xml(filepath):
+def namecheck_object_pair(filepath):
     filelist = os.listdir('working')
     splitpath = filepath.split('.')
+    # only check object files for pairity, limit of 2 files sharing namepattern
     if splitpath[1] != 'xml':
-        pair = splitpath[0]
-        pair += '{}'.format('.xml')
-        if pair not in filelist:
-            print('Object file {} is missing an xml file'.format(filepath))
-            return 1
-        else:
-            return 0
-    else:
-        return 0
-
-
-def namecheck_dupe_obj(filepath):
-    if '.xml' not in filepath:
-        filelist = os.listdir('working')
-        splitpath = filepath.split('.')
-        count = 0
-        for file in filelist:
-            if splitpath[0] in file:
-                count += 1
-        if count < 3:
-            return 0
-        else:
+        namepattern = splitpath[0]
+        count = len(list(filter(lambda x: namepattern in x, filelist)))
+        if count > 2:
             print('check file {}'.format(filepath))
-            print('check pattern {}'.format(splitpath[0]))
-            print('more than two files share a filename, '
-                  'naming pattern expects a '
-                  'mods-object pair, not a trio or more')
+            print('check pattern {}'.format(namepattern))
+            print('more than two files share a filename'
+                  ' correct the filenames')
             return 1
-    else:
-        return 0
+        else:
+            # look for xml file that shares the namepattern
+            namepattern += '{}'.format('.xml')
+            if namepattern not in filelist:
+                print('Object file {} is missing an xml file'.format(filepath))
+                return 1
+    return 0
 
 
 def namecheck_ext(filepath):
@@ -63,7 +49,7 @@ def namecheck_ext(filepath):
     splitpath = filepath.split('.')
     if splitpath[1] not in allowed_ext:
         print("{} filetype unsupported".format(filepath))
-        print("filetypes unsupported:", allowed_ext)
+        print("filetypes allowed:", allowed_ext)
         return 1
     else:
         return 0
@@ -82,8 +68,8 @@ def namecheck_dots(filepath):
 
 def namecheck_chars(filepath):
     bad_chars = 0
-    characters_disallowed = ['“~/?#[]@!$&()*+,;=}{|\\^~‘"']
-    for c in characters_disallowed:
+    disallowed = ['“~/?#[]@!$&()*+,;=}{|\\^~‘"']
+    for c in disallowed:
         if c in filepath:
             print("bad characters '{0}' in {1}".format(c, filepath))
             bad_chars += 1
@@ -113,11 +99,9 @@ def namecheck_hyphen(filepath):
 
 def namecheck_lonely(filepath):
     bad_lonesome = 0
-    count = 0
-    chunks = filepath.split('.')
-    for file in os.listdir('working'):
-        if chunks[0] in file:
-            count += 1
+    filelist = os.listdir('working')
+    name = filepath.split('.')
+    count = len(list(filter(lambda x: name[0] in x, filelist)))
     if count <= 1:
         lonely_message = "lonely object {} missing pair or missing children"
         print(lonely_message.format(filepath))
