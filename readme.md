@@ -50,11 +50,11 @@ execute the ingest command:
 
 - ```drush -u 1 ibi --ingest_set=<ingest_set_number>```
 
-This script will delete all the files to get the tool ready for the next batch of ingests
+This script will delete all the files in the output directory and working directory. run it after you are finished:
 
 - ```sh cleanup.sh```
 
-delete the copy from input only when you are sure everything is correct. If anything went wrong or files need to be renamed this acts as a backup for the ingest until you delete it. (don't run this with multiple zip files in the input directory)
+delete the copy from input only when you are sure everything is correct. If anything went wrong or files need to be renamed this acts as a backup for the ingest until you delete it. (don't run this procedure with multiple zip files in the input directory)
 
 - ```rm input/*```
 
