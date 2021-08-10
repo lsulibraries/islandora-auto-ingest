@@ -44,7 +44,7 @@ change into the drupal root:
 
 paste the command into the terminal and press enter:
 
-The command with process, and should finishe with an ingest set number:
+The command will pre-process, and should finishe with an ingest set number:
 
 execute the ingest command:
 
