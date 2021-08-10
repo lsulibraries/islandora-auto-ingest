@@ -1,39 +1,63 @@
 #ingest packager and nameconvention checker for louisiana digital library LDL
 
-requirements, islandora_compound_batch module is needed for creating structure files
-Somwhere on your local machine clone the repository. You'll have to add the path to the repo to the compound_process.sh
+instructions for use on the server
 
-- ```git clone https://github.com/lsulibraries/islandora_compound_batch```
+scp your zipfile to the ingest server /tmp directory
+
+- ```scp -i ~/path_to_key <zipped_files>.zip dgi-ingest:/tmp```
+
+log into the ldl ingest server via ssh (from command prompt or git bash):
+
+- ```ssh -i ~/path_to_key dgi-ingest```
+
+navigate to /etc/islandora-auto-ingest:
+
+- ```cd /etc/islandhora-auto-ingest```
+
+move your files to the input folder:
+
+- ```mv /tmp/<zipped_files>.zip input/```
 
 
-instructions for running the prototype:
 
-open a terminal and navigate to the path of this git repository
+The next command will check your files for adherence to the naming convention, and report any errors.
+If it finishes the check without error it will continue to packaging, and then drush command population.
 
+Choose one:
 
-initial setup: script to create some directories where files get placed and packaged:
+1.  simple object ingest procedure:
 
-- ```sh setup.sh```
-
-copy your zipped files to the input folder
-for example:
-
-- ```cp ~/Downloads/yourfiles.zip input/```
-
-simple object procedures 
-this only checks the files for adherence to the naming patterns
 - ```sh simpleprocess.sh```
 
-compound object procedures
-for compounds the files are checked for adherence to naming patterns and packaged appropriately
+2.  compound object ingest procedure:
+
 - ```sh compound_process.sh```
 
 
-you files will be placed in the output directory after they are packaged. If they are compound, they can now be a target for the create_structure.php script that comes with the islandora_compound_batch module
 
-we have added a simple_drush_cmd.py and a compound_drush_cmd.py file to help you make drush commands to ingest you should execute the command from the drupal root, not from within this folder (copy the command then ```cd /var/www/drupal7``` and paste it in the terminal) you are still responsible for executing your own ```drush ibi``` command on your own.
+Copy the outputted drush command (right click with mouse from terminal)
 
-run the cleanup script to clear out old data (deletes any files in the output directory or working directory)
+
+change into the drupal root:
+
+- ```cd /var/www/drupal7```
+
+paste the command into the terminal and press enter:
+
+The command with process, and should finishe with an ingest set number:
+
+execute the ingest command:
+
+- ```drush -u 1 ibi --ingest_set=<ingest_set_number>```
+
+This script will delete all the files to get the tool ready for the next batch of ingests
+
 - ```sh cleanup.sh```
 
-be sure to delete the zip you place in input/ before starting a new set of ingests (perhaps add to cleanup...)
+delete the copy from input only when you are sure everything is correct. If anything went wrong or files need to be renamed this acts as a backup for the ingest until you delete it. (don't run this with multiple zip files in the input directory)
+
+- ```rm input/*```
+
+
+
+
