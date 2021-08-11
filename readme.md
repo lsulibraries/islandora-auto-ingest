@@ -1,4 +1,4 @@
-#ingest packager and nameconvention checker for louisiana digital library LDL
+## ingest packager and nameconvention checker for louisiana digital library LDL
 
 requirements, islandora_compound_batch module is needed for creating structure files
 Somwhere on your local machine clone the repository. You'll have to add the path to the repo to the compound_process.sh
