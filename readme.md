@@ -1,4 +1,4 @@
-#ingest packager and nameconvention checker for louisiana digital library LDL
+## ingest packager and nameconvention checker for louisiana digital library LDL
 
 instructions for use on the server
 
