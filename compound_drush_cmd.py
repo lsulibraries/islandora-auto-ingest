@@ -31,9 +31,8 @@ def compound_command_populator():
     namespace = "--namespace={}".format(ns)
     parent = "--parent={}:collection".format(ns)
     cmodel = "--content_models={}".format(big_cmodel_string)
-    target = "--target=/etc/islandora-auto-ingest-kit/output/"
-    target += " --type=directory "
-    cmd_str = "drush -u 1 icbsp {0} {1} {2} {3}"
+    target = "--target=/etc/islandora-auto-ingest/output/"
+    cmd_str = "drush -u 1 icbp {0} {1} {2} {3}"
     cmd = cmd_str.format(cmodel, target, parent, namespace)
     print("constructed drush command for execution,"
           " review args for accuracy:\n", cmd)

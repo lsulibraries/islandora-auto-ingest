@@ -25,7 +25,7 @@ def simple_command_populator():
     parent = "{}:collection".format(ns)
     cmodel_str = "--content_models=islandora:{}"
     cmodel = cmodel_str.format(cmodel_dict[objtype[1]])
-    target = "--target=/etc/islandora-auto-ingest-kit/output/"
+    target = "--target=/etc/islandora-auto-ingest/output/"
     target += " --type=directory"
     cmd_str = "drush -u 1 ibsp {0} {1} {2} {3}"
     cmd = cmd_str.format(cmodel, target, parent, namespace)
