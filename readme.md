@@ -4,11 +4,11 @@ instructions for use on the server
 
 scp your zipfile to the ingest server /tmp directory
 
-- ```scp -i ~/path_to_key <zipped_files>.zip dgi-ingest:/tmp```
+- ```scp -i ~/path_to_key <zipped_files>.zip <user@dgi-ingest-ip-address>:/tmp```
 
 log into the ldl ingest server via ssh (from command prompt or git bash):
 
-- ```ssh -i ~/path_to_key dgi-ingest```
+- ```ssh -i ~/path_to_key <user@dgi-ingest-ip-address>```
 
 navigate to /etc/islandora-auto-ingest:
 
