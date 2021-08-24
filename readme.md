@@ -12,11 +12,11 @@ log into the ldl ingest server via ssh (from command prompt or git bash):
 
 navigate to /etc/islandora-auto-ingest:
 
-- ```cd /etc/islandhora-auto-ingest```
+- ```cd /etc/islandora-auto-ingest```
 
 move your files to the input folder:
 
-- ```mv /tmp/<zipped_files>.zip input/```
+- ```sudo mv /tmp/<zipped_files>.zip input/```
 
 
 
@@ -27,11 +27,11 @@ Choose one:
 
 1.  simple object ingest procedure:
 
-- ```sh simpleprocess.sh```
+- ```sudo sh simple_process.sh```
 
 2.  compound object ingest procedure:
 
-- ```sh compound_process.sh```
+- ```sudo sh compound_process.sh```
 
 
 
@@ -50,13 +50,17 @@ execute the ingest command:
 
 - ```drush -u 1 ibi --ingest_set=<ingest_set_number>```
 
-This script will delete all the files in the output directory and working directory. run it after you are finished:
+After your ingest completes, cd back into the directory of the ingest tool
 
-- ```sh cleanup.sh```
+- ```cd /etc/islandora-auto-ingest```
 
-delete the copy from input only when you are sure everything is correct. If anything went wrong or files need to be renamed this acts as a backup for the ingest until you delete it. (don't run this procedure with multiple zip files in the input directory)
+When you are ready to move on, this command will clean up the output and working directory, also use it if anything goes wrong in the previous steps:
 
-- ```rm input/*```
+- ```sudo sh cleanup.sh```
+
+delete the zipfile from input only when you are sure everything is correct. If anything went wrong or files need to be renamed this acts as a backup for the ingest until you delete it. (don't run this procedure with multiple zip files in the input directory)
+
+- ```sudo rm input/*```
 
 
 
