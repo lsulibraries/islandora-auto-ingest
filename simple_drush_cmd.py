@@ -22,7 +22,7 @@ def simple_command_populator():
     chunks = one_path_is_all.split('_')
     ns = "{0}-{1}".format(chunks[0], chunks[1])
     namespace = "--namespace={}".format(ns)
-    parent = "{}:collection".format(ns)
+    parent = "--parent={}:collection".format(ns)
     cmodel_str = "--content_models=islandora:{}"
     cmodel = cmodel_str.format(cmodel_dict[objtype[1]])
     target = "--target=/etc/islandora-auto-ingest/output/"
