@@ -27,7 +27,7 @@ Choose one:
 
 1.  simple object ingest procedure:
 
-- ```sudo sh simpleprocess.sh```
+- ```sudo sh simple_process.sh```
 
 2.  compound object ingest procedure:
 
@@ -50,11 +50,15 @@ execute the ingest command:
 
 - ```drush -u 1 ibi --ingest_set=<ingest_set_number>```
 
-This script will delete all the files in the output directory and working directory. run it after you are finished:
+After your ingest completes, cd back into the directory of the ingest tool
+
+- ```cd /etc/islandora-auto-ingest```
+
+When you are ready to move on, this command will clean up the output and working directory, also use it if anything goes wrong in the previous steps:
 
 - ```sudo sh cleanup.sh```
 
-delete the copy from input only when you are sure everything is correct. If anything went wrong or files need to be renamed this acts as a backup for the ingest until you delete it. (don't run this procedure with multiple zip files in the input directory)
+delete the zipfile from input only when you are sure everything is correct. If anything went wrong or files need to be renamed this acts as a backup for the ingest until you delete it. (don't run this procedure with multiple zip files in the input directory)
 
 - ```sudo rm input/*```
 
