@@ -17,6 +17,7 @@ def simple_command_populator():
             return 1
         if '.xml' not in path:
             one_path_is_all = path
+            #if output isn't clean errors on line 27
 
     objtype = one_path_is_all.split('.')
     chunks = one_path_is_all.split('_')
